@@ -14,7 +14,66 @@ body {
   background-size: 50px 50px;
   overflow-x: hidden;
 }
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0c0f24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
 
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader-content {
+  text-align: center;
+}
+
+.preloader-initials {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4.5rem;
+  color: #dca43b;
+  text-shadow: 0 0 20px rgba(220, 164, 59, 0.3);
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+
+.preloader-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #dca43b, transparent);
+  margin: 10px auto 0 auto;
+  animation: lineExpand 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(0.93);
+    text-shadow: 0 0 10px rgba(220, 164, 59, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 35px rgba(220, 164, 59, 0.7);
+  }
+}
+
+@keyframes lineExpand {
+  0%, 100% {
+    width: 40px;
+    opacity: 0.3;
+  }
+  50% {
+    width: 110px;
+    opacity: 1;
+  }
+}
 .main-invitation {
   display: flex;
   flex-direction: column;
@@ -221,6 +280,59 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
+.calendar-button {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: transparent;
+  border: 1px solid #dca43b;
+  color: #dca43b;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.calendar-button:hover {
+  background-color: #dca43b;
+  color: #0c0f24;
+  transform: translateY(-2px);
+}
+
+.copy-address-button {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: transparent;
+  border: 1px solid #dca43b;
+  color: #dca43b;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.copy-address-button:hover {
+  background-color: #dca43b;
+  color: #0c0f24;
+  transform: translateY(-2px);
+}
+
+@media screen and (max-width: 480px) {
+  .map-button, 
+  .copy-address-button {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 10px auto 0 auto;
+  }
+}
+
 .heading-event {
   font-family: 'Great Vibes', cursive;
   font-size: 2.2rem;
@@ -375,10 +487,10 @@ body {
 }
 
 .bank-logo {
-  height: 35px;
-  width: auto;
-  margin-bottom: 15px;
-  filter: brightness(0) invert(1);
+  width: 100px;
+  height: auto;
+  margin-bottom: 12px;
+  object-fit: contain;
 }
 
 .bank-name {

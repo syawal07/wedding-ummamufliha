@@ -1,3 +1,12 @@
+
+  window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+    setTimeout(function () {
+      if (preloader) {
+        preloader.classList.add("fade-out");
+      }
+    }, 1500);
+  });
 document.addEventListener("DOMContentLoaded", function () {
   const openBtn = document.getElementById("openBtn");
   const soundToggle = document.getElementById("soundToggle");

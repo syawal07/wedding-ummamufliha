@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="./css/invitation.css" />
   </head>
   <body>
+    <div id="preloader">
+      <div class="preloader-content">
+        <div class="preloader-initials">Umma & mufliha</div>
+        <div class="preloader-line"></div>
+      </div>
+    </div>
     <div class="main-invitation">
       <div class="text-box">
         <div class="cultural-ornament">
@@ -22,7 +28,7 @@
 
         <div class="wedding-title">
           <div class="groom-name anim-pop" style="animation-delay: 0.8s">
-            Khaerul Ummah, S.P
+            Khaerul Ummah S.P., CHRM.
           </div>
           <div class="and-symbol anim-pop" style="animation-delay: 1s">&</div>
           <div class="bride-name anim-pop" style="animation-delay: 1.2s">
@@ -79,7 +85,7 @@
       <div class="section-card">
         <h2 class="heading-event">Akad Nikah</h2>
         <p class="event-detail">
-          <strong>Minggu, 31 Mei 2026</strong><br />
+          <strong>Ahad, 31 Mei 2026</strong><br />
           Pukul 10.00 WITA - Selesai<br />
           <span class="location-badge">Kediaman Mempelai Wanita</span><br />
           Jl. Andi Muri Dg. Lulu, Kel. Jagong, Kec. Pangkajene Kabupaten Pangkep
@@ -95,6 +101,12 @@
           Jl. KH. Abd. Jalil Kel. Bonto Perak, Kec. Pangkajene, Kab. Pangkep
           (Belakang Masjid Jami Nurul Huda)
         </p>
+        <a
+          class="calendar-button"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Pernikahan%20Khaerul%20Ummah%20%26%20Mufliha%20Ilham&dates=20260531T020000Z%2F20260531T070000Z&details=Menghadiri%20acara%20Akad%20%26%20Resepsi%20Pernikahan%20Khaerul%20Ummah%20%26%20Mufliha%20Ilham&location=Jl.%20KH.%20Abd.%20Jalil%20Kel.%20Bonto%20Perak%2C%20Kec.%20Pangkajene%2C%20Kab.%20Pangkep%20%28Belakang%20Masjid%20Jami%20Nurul%20Huda%29"
+          target="_blank"
+          >Simpan Tanggal ke Kalender</a
+        >
       </div>
 
       <!-- <div class="section-card">
@@ -125,6 +137,18 @@
         <a class="map-button" href="https://maps.google.com" target="_blank"
           >Buka Google Maps</a
         >
+        <button
+          class="copy-address-button"
+          onclick="
+            navigator.clipboard
+              .writeText(
+                'Jl. KH. Abd. Jalil Kel. Bonto Perak, Kec. Pangkajene, Kab. Pangkep',
+              )
+              .then(() => alert('Alamat lengkap berhasil disalin!'))
+          "
+        >
+          Salin Alamat Lengkap
+        </button>
       </div>
 
       <div class="moment-section">
@@ -163,28 +187,15 @@
         <h2 class="heading-event">Wedding Gift</h2>
         <div class="gift-list">
           <div class="gift-item">
-            <img src="./assets/bri.png" alt="BRI" class="bank-logo" />
+            <img src="./assets/seabank.png" alt="Seabank" class="bank-logo" />
             <div class="bank-info">
-              <p class="bank-name">Bank BRI a/n Mufliha</p>
-              <p class="account-number" id="rek1">1234567890</p>
+              <p class="bank-name">Seabank a/n Khaerul Ummah</p>
+              <p class="account-number" id="rek1">901569113480</p>
               <button onclick="copyRekening('rek1')">
                 Salin Nomor Rekening
               </button>
             </div>
           </div>
-        </div>
-
-        <div class="qr-section">
-          <h3 class="qr-title">Scan QR Code</h3>
-          <img
-            src="./assets/qr.jpg"
-            alt="QR Code"
-            class="qr-code"
-            id="qrImage"
-          />
-          <a id="downloadQR" href="./assets/qr.jpg" download="qr-code.png"
-            >Unduh QR Code</a
-          >
         </div>
       </div>
 
