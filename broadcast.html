@@ -132,7 +132,8 @@ Hormat kami,
   </div>
 
   <script>
-    const tamu = [
+    // 1. Data bawaan (67 Tamu)
+    const tamuDefault = [
       { nama: "Kakanda Asrul", wa: "" }, { nama: "Kakanda Amirullah", wa: "" },
       { nama: "Kakanda Arman Malik", wa: "" }, { nama: "Kakanda Nurdianyah", wa: "" },
       { nama: "Kakanda Ahmad Fahri Ramadhan", wa: "" }, { nama: "Kakanda Maghfiratush Sholihah.", wa: "" },
@@ -169,6 +170,12 @@ Hormat kami,
       { nama: "PD IPM Barru", wa: "" }
     ];
 
+    // 2. Ambil data tamu tambahan dari Local Storage (jika ada)
+    let tamuTambahan = JSON.parse(localStorage.getItem("tamuTambahan")) || [];
+    
+    // 3. Gabungkan data bawaan dan data tambahan
+    let tamu = [...tamuDefault, ...tamuTambahan];
+
     const baseUrl = "https://syawal07.github.io/wedding-ummamufliha/?to=";
     const guestListContainer = document.getElementById("guestList");
 
@@ -176,7 +183,7 @@ Hormat kami,
       guestListContainer.innerHTML = "";
       const template = document.getElementById("templateMessage").value;
 
-      tamu.forEach(guest => {
+      tamu.forEach((guest, index) => {
         const encodedNameUrl = encodeURIComponent(guest.nama);
         const linkUndangan = baseUrl + encodedNameUrl;
 
@@ -189,9 +196,15 @@ Hormat kami,
 
         const div = document.createElement("div");
         div.className = "guest-item";
+        
+        // Tambahkan tombol "Hapus" hanya untuk tamu tambahan (bukan default)
+        let deleteBtn = index >= tamuDefault.length 
+          ? `<button onclick="deleteGuest(${index})" style="margin-left:10px; background:transparent; border:none; color:red; cursor:pointer; font-weight:bold;">X</button>` 
+          : '';
+
         div.innerHTML = `
           <div style="display: flex; flex-direction: column;">
-            <span class="guest-name">${guest.nama}</span>
+            <span class="guest-name">${guest.nama} ${deleteBtn}</span>
             <span style="font-size: 0.75rem; color: #888;">${guest.wa ? '+' + guest.wa : 'Pilih kontak manual di WA'}</span>
           </div>
           <a href="${waLink}" target="_blank" class="btn-send ${!guest.wa ? 'manual' : ''}">
@@ -215,12 +228,30 @@ Hormat kami,
         return;
       }
 
-      tamu.push({ nama: newName, wa: newWa });
+      // Tambahkan ke array tamu tambahan
+      tamuTambahan.push({ nama: newName, wa: newWa });
+      
+      // Simpan ke Local Storage
+      localStorage.setItem("tamuTambahan", JSON.stringify(tamuTambahan));
+      
+      // Perbarui array utama
+      tamu = [...tamuDefault, ...tamuTambahan];
+
       nameInput.value = "";
       waInput.value = "";
       
       renderGuests();
-      alert(`Tamu bernama ${newName} berhasil ditambahkan! Silakan cek di paling bawah daftar.`);
+    }
+
+    // Fitur baru: Menghapus tamu tambahan
+    function deleteGuest(index) {
+      if(confirm("Hapus tamu ini dari daftar?")) {
+        const indexTambahan = index - tamuDefault.length;
+        tamuTambahan.splice(indexTambahan, 1);
+        localStorage.setItem("tamuTambahan", JSON.stringify(tamuTambahan));
+        tamu = [...tamuDefault, ...tamuTambahan];
+        renderGuests();
+      }
     }
 
     renderGuests();
